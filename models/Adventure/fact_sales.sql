@@ -1,1 +1,2 @@
-SELECT * FROM `adventureworks2019.Sales.SalesOrderDetail` 
+SELECT * 
+FROM `adventureworks2019.Sales.SalesOrderDetail` 
