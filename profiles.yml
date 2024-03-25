@@ -4,7 +4,7 @@ dec_project2:
       dataset: pj2_dbt
       job_execution_timeout_seconds: 300
       job_retries: 1
-      keyfile: D:\Learning\BigData\dbt\data_warehouse_course\conf\service_acc_key.json
+      keyfile: zzz
       location: US
       method: service-account
       priority: interactive
