@@ -1,3 +1,3 @@
 SELECT 
   *
-FROM `vit-lam-data.wide_world_importers.application__people`
+FROM  `adventureworks2019.Person.Person`
