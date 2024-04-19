@@ -41,7 +41,7 @@ FROM  `adventureworks2019.Sales.Store`
   )
 
   SELECT
-  store_key
-  ,store_name
-  ,sales_person_key
+    store_key
+    ,store_name
+    ,sales_person_key
   FROM dim_store__add_undefined_record
