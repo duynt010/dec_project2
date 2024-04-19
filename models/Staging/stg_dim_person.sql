@@ -53,21 +53,21 @@ WITH dim_person__source AS (
 
   UNION all
   SELECT
-    0 as person_key,
-	'Undefined' as person_title,
-	'Undefined' as person_first_name,
-	'Undefined' as person_middle_name,
-	'Undefined' as person_last_name,
-	'Undefined' as person_suffix
+      0 as person_key,
+    'Undefined' as person_title,
+    'Undefined' as person_first_name,
+    'Undefined' as person_middle_name,
+    'Undefined' as person_last_name,
+    'Undefined' as person_suffix
 
   UNION ALL
   SELECT
-   -1 as person_key,
-	'Invalid' as person_title,
-	'Invalid' as person_first_name,
-	'Invalid' as person_middle_name,
-	'Invalid' as person_last_name,
-	'Invalid' as person_suffix
+    -1 as person_key,
+    'Invalid' as person_title,
+    'Invalid' as person_first_name,
+    'Invalid' as person_middle_name,
+    'Invalid' as person_last_name,
+    'Invalid' as person_suffix
   )
 
   SELECT 
