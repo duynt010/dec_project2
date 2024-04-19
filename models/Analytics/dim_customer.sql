@@ -8,8 +8,6 @@ SELECT
     ,dim_person.person_first_name
     ,dim_person.person_middle_name
     ,dim_person.person_last_name
-
-
 FROM
     {{ref("stg_dim_customer")}} dim_customer
     LEFT JOIN {{ref("stg_dim_person")}} dim_person
