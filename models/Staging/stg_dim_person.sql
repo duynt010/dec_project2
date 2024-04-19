@@ -2,9 +2,9 @@ WITH dim_person__source AS (
 	SELECT 
 		*
 	FROM `adventureworks2019.Person.Person`
-),
+)
 
-dim_person__rename AS (
+  ,dim_person__rename AS (
 	SELECT
 		BusinessEntityID AS person_key,
 		Title AS person_title,
@@ -15,7 +15,7 @@ dim_person__rename AS (
 	FROM dim_person__source
 )
 
-  ,dim_customer__convert AS (
+  ,dim_person__convert AS (
   SELECT
     person_key,
     CASE 
@@ -41,7 +41,7 @@ dim_person__rename AS (
   FROM dim_person__rename
  )
 
-	,dim_customer__add_undefined_record as (
+	,dim_person__add_undefined_record as (
   SELECT 
     person_key,
     person_title,
@@ -49,7 +49,7 @@ dim_person__rename AS (
     person_middle_name,
     person_last_name,
     person_suffix
-  FROM dim_customer__convert
+  FROM dim_person__convert
 
   UNION all
   SELECT
@@ -70,12 +70,11 @@ dim_person__rename AS (
 	'Invalid' as person_suffix
   )
 
-SELECT 
-  person_key,
-  person_title,
-  person_first_name,
-  person_middle_name,
-  person_last_name,
-  person_suffix
-FROM dim_customer__add_undefined_record
-order by person_key asc
+  SELECT 
+    person_key,
+    person_title,
+    person_first_name,
+    person_middle_name,
+    person_last_name,
+    person_suffix
+  FROM dim_person__add_undefined_record
