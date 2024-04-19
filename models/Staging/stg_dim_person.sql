@@ -1,9 +1,10 @@
-WITH person AS (
+WITH dim_person__source AS (
 	SELECT 
 		*
 	FROM `adventureworks2019.Person.Person`
 ),
-rename AS (
+
+dim_person__rename AS (
 	SELECT
 		BusinessEntityID AS person_key,
 		Title AS person_title,
@@ -11,27 +12,44 @@ rename AS (
 		MiddleName AS person_middle_name,
 		LastName AS person_last_name,
 		Suffix AS person_suffix
-	FROM person
-),
-final AS (
-	SELECT
-		person_key,
-		person_title,
-		person_first_name,
-		person_middle_name,
-		person_last_name,
-		person_suffix
-	FROM rename
+	FROM dim_person__source
 )
+
+  ,dim_customer__convert AS (
+  SELECT
+    person_key,
+    CASE 
+      WHEN person_title = 'NULL' THEN NULL  -- Explicitly handle 'NULL' as SQL NULL
+      ELSE person_title
+    END  person_title,
+    CASE 
+      WHEN person_first_name = 'NULL' THEN NULL  -- Explicitly handle 'NULL' as SQL NULL
+      ELSE person_first_name
+    END  person_first_name,
+    CASE 
+      WHEN person_middle_name = 'NULL' THEN NULL  -- Explicitly handle 'NULL' as SQL NULL
+      ELSE person_middle_name
+    END  person_middle_name,
+    CASE 
+      WHEN person_last_name = 'NULL' THEN NULL  -- Explicitly handle 'NULL' as SQL NULL
+      ELSE person_last_name
+    END  person_last_name,
+    CASE 
+      WHEN person_suffix = 'NULL' THEN NULL  -- Explicitly handle 'NULL' as SQL NULL
+      ELSE person_suffix
+    END  person_suffix
+  FROM dim_person__rename
+ )
+
 	,dim_customer__add_undefined_record as (
   SELECT 
     person_key,
-	person_title,
-	person_first_name,
-	person_middle_name,
-	person_last_name,
-	person_suffix
-  FROM final
+    person_title,
+    person_first_name,
+    person_middle_name,
+    person_last_name,
+    person_suffix
+  FROM dim_customer__convert
 
   UNION all
   SELECT
@@ -52,4 +70,12 @@ final AS (
 	'Invalid' as person_suffix
   )
 
-SELECT * FROM dim_customer__add_undefined_record
+SELECT 
+  person_key,
+  person_title,
+  person_first_name,
+  person_middle_name,
+  person_last_name,
+  person_suffix
+FROM dim_customer__add_undefined_record
+order by person_key asc

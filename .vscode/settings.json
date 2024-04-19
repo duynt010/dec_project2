@@ -1,5 +1,6 @@
 {
-    "dbt.queryLimit": 10,
+    "dbt.queryLimit": 100,
     "dbt.enableNewLineagePanel": true,
-    "dbt.enableNewQueryPanel": false
+    "dbt.enableNewQueryPanel": false,
+    "dbt.queryScale": 1.12
 }

@@ -6,7 +6,12 @@ FROM `adventureworks2019.Sales.Customer`
   ,dim_customer__rename as (
     SELECT
         cast(CustomerID as integer) AS customer_key
-        ,cast(REPLACE(PersonID,"NULL",Null) as INTEGER) as person_key
+        ,CAST(
+          CASE 
+            WHEN PersonID = 'NULL' THEN NULL  -- Explicitly handle 'NULL' as SQL NULL
+            ELSE PersonID
+          END AS INTEGER)
+        as person_key
         ,CAST(
           CASE 
             WHEN StoreID = 'NULL' THEN NULL  -- Explicitly handle 'NULL' as SQL NULL

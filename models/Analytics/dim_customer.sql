@@ -4,10 +4,10 @@ SELECT
     ,dim_customer.store_key as reseller_store_key
     ,dim_store.store_name as reseller_store_name
     ,dim_customer.person_key
-    ,COALESCE(dim_person.person_title,'Invalid') as person_title
-    ,COALESCE(dim_person.person_first_name,'Ivalid') as person_first_name
-    ,COALESCE(dim_person.person_middle_name,'Ivalid') as person_middle_name
-    ,COALESCE(dim_person.person_last_name,'Ivalid') as person_last_name
+    ,dim_person.person_title
+    ,dim_person.person_first_name
+    ,dim_person.person_middle_name
+    ,dim_person.person_last_name
 
 
 FROM
