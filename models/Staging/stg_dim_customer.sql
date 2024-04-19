@@ -25,7 +25,7 @@ FROM `adventureworks2019.Sales.Customer`
   ,dim_customer__convert AS (
   SELECT
     *,
-    CASE
+    CASE --flag defines a reseller where store_id is not null and an individual as a customer where store_id is null
       WHEN store_key is NOT NULL THEN 'Reseller' 
       WHEN store_key is NULL THEN 'Not Reseller'
       ELSE  'Invalid' END
@@ -59,10 +59,10 @@ FROM `adventureworks2019.Sales.Customer`
     ,-1 as territory_key
   )
 
-    SELECT
-        customer_key
-        ,is_reseller
-        ,COALESCE(person_key, 0) as person_key
-        ,COALESCE(store_key, 0) as store_key
-        ,territory_key
-    FROM dim_customer__add_undefined_record AS dim_customer
+	SELECT
+		customer_key
+		,is_reseller
+		,COALESCE(person_key, 0) as person_key
+		,COALESCE(store_key, 0) as store_key
+		,territory_key
+	FROM dim_customer__add_undefined_record AS dim_customer
