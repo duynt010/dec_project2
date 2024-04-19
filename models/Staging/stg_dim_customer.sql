@@ -6,17 +6,17 @@ FROM `adventureworks2019.Sales.Customer`
   ,dim_customer__rename as (
     SELECT
         cast(CustomerID as integer) AS customer_key
-        ,CAST(
+        ,cast(
           CASE 
             WHEN PersonID = 'NULL' THEN NULL  -- Explicitly handle 'NULL' as SQL NULL
             ELSE PersonID
-          END AS INTEGER)
+          END AS integer)
         as person_key
-        ,CAST(
+        ,cast(
           CASE 
             WHEN StoreID = 'NULL' THEN NULL  -- Explicitly handle 'NULL' as SQL NULL
             ELSE StoreID
-          END AS INTEGER)
+          END AS integer)
         as store_key
         ,cast(TerritoryID as integer) as territory_key
     FROM dim_customer__source
