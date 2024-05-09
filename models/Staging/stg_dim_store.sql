@@ -4,7 +4,7 @@ WITH dim_store__source as (
 FROM  `adventureworks2019.Sales.Store`
 )
 
-  ,dim_store__rename as (
+,dim_store__rename as (
   SELECT
     BusinessEntityID as store_key
     ,Name as store_name
@@ -12,7 +12,7 @@ FROM  `adventureworks2019.Sales.Store`
   FROM dim_store__source
   )
 
-  ,dim_store__cast_type as (
+,dim_store__cast_type as (
   SELECT
     cast(store_key AS integer) as store_key
     ,cast(store_name as string) as store_name
@@ -20,7 +20,7 @@ FROM  `adventureworks2019.Sales.Store`
   FROM dim_store__rename
   )
 
-  ,dim_store__add_undefined_record as (
+,dim_store__add_undefined_record as (
   SELECT 
     store_key
     ,store_name
