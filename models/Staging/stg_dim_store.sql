@@ -2,7 +2,7 @@ WITH dim_store__source as (
   SELECT 
   *
 FROM  `adventureworks2019.Sales.Store`
-
+)
 ,dim_store__rename as (
   SELECT
     BusinessEntityID as store_key
